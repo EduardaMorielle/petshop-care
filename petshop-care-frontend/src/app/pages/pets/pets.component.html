@@ -1,0 +1,61 @@
+<div class="page-header">
+  <h2><mat-icon>pets</mat-icon> Meus Pets</h2>
+  <button mat-raised-button color="primary" (click)="abrirFormulario()">
+    <mat-icon>add</mat-icon> Novo Pet
+  </button>
+</div>
+
+<mat-card>
+  <mat-card-content>
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar pet</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (input)="filtrar($event)" placeholder="Nome, raça..." />
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort class="full-width">
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+        <td mat-cell *matCellDef="let pet">{{ pet.nome }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="especie">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Espécie</th>
+        <td mat-cell *matCellDef="let pet">{{ especieLabel(pet.especie) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="raca">
+        <th mat-header-cell *matHeaderCellDef>Raça</th>
+        <td mat-cell *matCellDef="let pet">{{ pet.raca || '—' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="idade">
+        <th mat-header-cell *matHeaderCellDef>Idade</th>
+        <td mat-cell *matCellDef="let pet">
+          {{ pet.idade ? (pet.idade | number) + ' ano(s)' : '—' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let pet">
+          <button mat-icon-button color="primary" (click)="abrirFormulario(pet)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deletar(pet)" matTooltip="Remover">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell no-data" colspan="5">Nenhum pet encontrado</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons />
+  </mat-card-content>
+</mat-card>

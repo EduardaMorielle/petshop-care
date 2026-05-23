@@ -1,0 +1,50 @@
+<div class="welcome">
+  <h2>Olá, {{ auth.getNome() }}! 👋</h2>
+  <p>Bem-vindo ao PetShop Care — Sistema de Gerenciamento</p>
+</div>
+
+<div class="cards-grid">
+  <mat-card class="stat-card blue" routerLink="/pets">
+    <mat-card-content>
+      <mat-icon>pets</mat-icon>
+      <div class="stat-info">
+        <span class="stat-value">{{ totalPets }}</span>
+        <span class="stat-label">Pets Cadastrados</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="stat-card green" routerLink="/agendamentos">
+    <mat-card-content>
+      <mat-icon>calendar_today</mat-icon>
+      <div class="stat-info">
+        <span class="stat-value">{{ totalAgendamentos }}</span>
+        <span class="stat-label">Total de Agendamentos</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="stat-card orange" routerLink="/agendamentos">
+    <mat-card-content>
+      <mat-icon>today</mat-icon>
+      <div class="stat-info">
+        <span class="stat-value">{{ agendamentosHoje }}</span>
+        <span class="stat-label">Agendamentos Hoje</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="stat-card purple" routerLink="/servicos">
+    <mat-card-content>
+      <mat-icon>content_cut</mat-icon>
+      <div class="stat-info">
+        <span class="stat-value">{{ totalServicos }}</span>
+        <span class="stat-label">Serviços Disponíveis</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="banner">
+  <img src="assets/banner.jpg" alt="PetShop Care" />
+</div>

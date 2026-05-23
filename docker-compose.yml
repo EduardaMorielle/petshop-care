@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: petshopcare-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: petshopcare
+      MYSQL_USER: petshop
+      MYSQL_PASSWORD: petshop123
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - petshop-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./petshop-care-api
+    container_name: petshopcare-api
+    ports:
+      - "8282:8282"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/petshopcare?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Manaus
+      SPRING_DATASOURCE_USERNAME: petshop
+      SPRING_DATASOURCE_PASSWORD: petshop123
+      SERVER_PORT: 8282
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - petshop-net
+    restart: unless-stopped
+
+  frontend:
+    build: ./petshop-care-frontend
+    container_name: petshopcare-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - petshop-net
+    restart: unless-stopped
+
+networks:
+  petshop-net:
+    driver: bridge
+
+volumes:
+  db_data:

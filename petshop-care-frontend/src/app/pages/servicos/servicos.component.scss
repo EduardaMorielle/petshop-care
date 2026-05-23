@@ -1,0 +1,29 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1a237e;
+  }
+}
+
+.search-field { width: 300px; margin-bottom: 16px; }
+.full-width { width: 100%; }
+.no-data { text-align: center; padding: 32px; color: #999; }
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  &.ativo { background: #e8f5e9; color: #2e7d32; }
+  &.inativo { background: #ffebee; color: #c62828; }
+}
