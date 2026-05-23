@@ -1,0 +1,14 @@
+# Java / Maven
+petshop-care-api/target/
+
+# Node / Angular
+petshop-care-frontend/node_modules/
+petshop-care-frontend/dist/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# GitHub interno
+.github/
